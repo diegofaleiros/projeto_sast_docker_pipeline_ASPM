@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "sentinel-aspm-mandatory-v1",
+  "require_root_owned": true,
+  "require_cached_rules": true,
+  "block_severities": [
+    "HIGH",
+    "CRITICAL"
+  ],
+  "executables": {
+    "Semgrep": "/opt/venv/bin/semgrep",
+    "Bearer": "/opt/tools/bin/bearer",
+    "Trivy": "/opt/tools/bin/trivy",
+    "Git": "/usr/bin/git"
+  },
+  "semgrep_required": [
+    "p/default",
+    "p/owasp-top-ten",
+    "p/secrets"
+  ],
+  "semgrep_allowed": [
+    "p/default",
+    "p/owasp-top-ten",
+    "p/secrets",
+    "p/java",
+    "p/csharp",
+    "p/php",
+    "p/ruby",
+    "p/kotlin",
+    "p/scala",
+    "p/terraform",
+    "p/kubernetes"
+  ],
+  "allowed_skip_paths": [
+    ".git",
+    "sentinel-artifacts"
+  ],
+  "max_files": 50000,
+  "max_code_bytes": 2000000,
+  "max_blob_bytes": 25000000,
+  "max_snapshot_bytes": 250000000,
+  "exceptions": [],
+  "trivy_required_scanners": [
+    "misconfig"
+  ],
+  "aspm_allowed_hosts": [
+    "191.252.227.92"
+  ]
+}

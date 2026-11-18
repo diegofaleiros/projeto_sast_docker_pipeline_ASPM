@@ -1,0 +1,40 @@
+# Template mantido pelo time de Segurança/SRE.
+# ANTES de publicar: substituir o digest abaixo pelo RepoDigest da nova imagem.
+# Só include não impõe execução; ver CENTRALIZACAO_GITLAB.txt.
+sentinel_sast:
+  stage: .pipeline-policy-pre
+  tags:
+    - docker-sast
+  image:
+    name: diegofs28/projeto_sast_docker_pipeline_aspm@sha256:SUBSTITUIR_PELO_DIGEST_DA_NOVA_IMAGEM
+    entrypoint: [""]
+  variables:
+    RUN_PIPELINE: "true"
+    PIPELINE_BLOCK_SEVERITIES: "HIGH,CRITICAL"
+    PIPELINE_FAIL_ON_SCAN_ERROR: "true"
+    PIPELINE_FAIL_ON_NOTIFICATION_ERROR: "true"
+    TRIVY_ENABLED: "true"
+    TRIVY_SCANNERS: "misconfig"
+    BEARER_SCANNERS: "sast,secrets"
+    SEMGREP_CONFIGS: "p/default p/owasp-top-ten p/secrets"
+    # Ambiente do checkout e integridade do import são controlados pelo template.
+    GIT_STRATEGY: "clone"
+    PYTHONPATH: "/app"
+    PYTHONNOUSERSITE: "1"
+  before_script: []
+  after_script: []
+  dependencies: []
+  cache: []
+  allow_failure: false
+  timeout: 60m
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - when: on_success
+  script:
+    - cd /app
+    - /opt/venv/bin/python -m sast_sentinel pipeline --source "$CI_PROJECT_DIR"
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - sentinel-artifacts/summary.json

@@ -1,0 +1,28 @@
+# EXEMPLO para Security Policy Project de GitLab ULTIMATE.
+# Adaptar e validar no editor de políticas da versão instalada antes de vincular.
+pipeline_execution_policy:
+  - name: Sentinel SAST obrigatorio
+    description: Gate central de alta/critica, sem permitir skip ci.
+    enabled: true
+    pipeline_config_strategy: inject_policy
+    content:
+      include:
+        - project: devsecops/seguranca-sast
+          ref: SUBSTITUIR_PELO_SHA_COMPLETO_APROVADO
+          file: /templates/sentinel-policy.gitlab-ci.yml
+    skip_ci:
+      allowed: false
+    variables_override:
+      allowed: false
+      exceptions:
+        - ASPM_BASE_URL
+        - ASPM_PAT
+        - ASPM_WORKSPACE
+        - ASPM_BUSINESS_PRODUCT
+        - ASPM_SCAN_COMPLETE
+        - ASPM_POLL_TIMEOUT
+        # Somente os valores de integração herdados do grupo.
+        - SLACK_WEBHOOK_URL
+        - SLACK_MENTIONS
+        - SLACK_SEVERITIES
+        - SLACK_MAX_FINDINGS

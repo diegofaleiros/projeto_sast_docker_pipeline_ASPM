@@ -1,0 +1,9 @@
+# Dependências do SAST Security Sentinel.
+# Instale dentro de um virtualenv:  bash setup.sh
+#
+# O Semgrep é instalado aqui dentro, então o venv já sai com um dos dois scanners
+# funcionando. O Bearer é um binário Go e não existe no PyPI — o setup.sh instala à parte.
+
+requests>=2.32.4,<3
+python-dotenv>=1.0,<2
+semgrep>=1.100

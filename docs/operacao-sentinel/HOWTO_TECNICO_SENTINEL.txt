@@ -1,0 +1,2 @@
+Edição ASPM: veja README.txt na raiz para o procedimento atualizado.
+As apresentações e figuras desta pasta documentam a arquitetura anterior.

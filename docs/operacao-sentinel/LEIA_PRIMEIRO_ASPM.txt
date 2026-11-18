@@ -1,0 +1,2 @@
+As apresentações e figuras desta pasta pertencem à edição anterior.
+Para ASPM sem armazenamento S3, use README.txt na raiz do projeto.

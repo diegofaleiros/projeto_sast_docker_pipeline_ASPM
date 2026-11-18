@@ -1,0 +1,8 @@
+.env
+*.env
+.aws/
+.state*/
+relatorios/
+**/__pycache__/
+*Zone.Identifier*
+sentinel-artifacts/

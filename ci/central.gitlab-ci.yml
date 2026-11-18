@@ -1,0 +1,11 @@
+# Configuração autoritativa, em um projeto administrado por Segurança/SRE.
+# Configurar o caminho externo em Settings > CI/CD > General pipelines.
+# Este exemplo contém apenas segurança; não importa YAML arbitrário da aplicação.
+# Build/deploy existentes devem ser migrados para templates centrais revisados.
+stages:
+  - security
+  - test
+  - build
+  - deploy
+include:
+  - local: /templates/sentinel.gitlab-ci.yml

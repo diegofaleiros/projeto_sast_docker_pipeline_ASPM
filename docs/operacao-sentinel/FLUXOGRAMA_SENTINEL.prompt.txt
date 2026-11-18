@@ -1,0 +1,29 @@
+Ferramenta: image_gen integrada; geração e edição de conectores.
+Prompt inicial:
+Create a precise professional Portuguese flowchart infographic as one high-resolution landscape 16:9 image for an executive presentation, suitable for 2560x1440 display. Use clean flat corporate typography, generous spacing, light warm-white background, midnight navy text and headings, teal success path, red blocked path and amber technical errors. Real readable Portuguese labels, no decorative illustrations, no logos, no watermark. All connectors clear, arrowheads correctly point forward, no tangled lines. This is an engineering workflow, NOT a software dashboard.
+
+Title at top: "Sentinel SAST — dois modos de execução".
+
+Upper area ~65% height: labeled lane "PIPELINE — SAST antes de build e deploy".
+Main sequence across top row with connected rectangles:
+1 "Push / Merge Request"
+2 "Validar commit e política" with smaller line "SHA • integridade • anti-bypass"
+3 "Semgrep + Bearer + Trivy" with smaller line "Código • segredos • IaC"
+4 "Comunicar e registrar" with smaller line "Slack • DefectDojo • resumo"
+5 diamond "Gate"
+Then arrows from Gate to three clear outcome rows below:
+- amber outcome "Erro técnico, cobertura incompleta ou falha de comunicação" then "SAÍDA 2 — BLOQUEAR"
+- red outcome "HIGH ou CRITICAL sem exceção aprovada" then "SAÍDA 1 — BLOQUEAR"
+- teal outcome "Análise válida e sem bloqueadores" then "SAÍDA 0 — APROVAR" followed with arrows to "BUILD" then "DEPLOY". Only the approved branch may connect to BUILD and DEPLOY. Blocked branches must visibly terminate with no connection to build/deploy.
+A short dashed branch from validation node to the technical-error outcome must clearly indicate "Configuração inválida". No depiction implying configuration failures always notify.
+Small readable footer for upper lane: "Erro técnico prevalece sobre achados. Dojo recebe somente relatórios válidos."
+
+Lower area ~30% height, separated by a clear whitespace and thin neutral divider: labeled lane "MONITORAMENTO ASSÍNCRONO — identifica e reporta".
+Six simple connected rectangles horizontally left-to-right:
+"Agendamento" → "Ler estado S3 e GitLab" → "Selecionar commits novos" → "Semgrep + Bearer + Trivy" → "Slack + DefectDojo" → "Atualizar estado S3".
+Lower lane must have NO connector to BUILD or DEPLOY. Below: "Não bloqueia entregas • Cobertura conforme acesso, branches, janela e limites".
+
+Final small footer along bottom: "Trivy: somente misconfig (IaC). Pipeline não consulta S3. Deploy deve depender do gate aprovado."
+Prioritize faithful semantics and legibility over ornament. Spell every label correctly. Ensure enough spacing so every label fits completely within its element and no arrow crosses text.
+
+Ajuste final de conectores: preservar textos e layout; remover conexões dos resultados bloqueados ao caminho de build; mover a distribuição do Gate para o lado de entrada das condições; manter somente SAÍDA 0 conectada a BUILD e DEPLOY.
