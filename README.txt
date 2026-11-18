@@ -4,7 +4,8 @@ Esta edição está em projeto_sast_docker_pipeline_ASPM. O projeto original per
 separado. Destino dos findings: ASPM Wake, conforme guia HTML v0.431.0 de 17/11/2026.
 Integração DefectDojo, backend Amazon S3 e dependência boto3 foram removidos.
 Os tokens antigos de Dojo/AWS foram retirados SOMENTE do sentinel.env desta cópia.
-Preencha o bloco ASPM; as credenciais antigas não servem para o ASPM.
+Na pipeline, cadastre URL, PAT, Empresa e Produto em GitLab CI/CD Variables.
+O sentinel.env destina-se a execuções manuais da auditoria, não ao job GitLab.
 
 1. PREPARAR O ASPM
 Crie um Produto na Empresa pela interface e anote o slug (ASPM_BUSINESS_PRODUCT).
@@ -32,6 +33,10 @@ Não use a imagem antiga: ela continua com o destino antigo.
 3. VARIÁVEIS GLOBAIS NO GITLAB
 No grupo que contém os projetos: Settings > CI/CD > Variables > Add variable.
 Tipo Variable; Environment scope * (ou o escopo real do ambiente do job).
+A imagem não contém URL ASPM padrão: o job deve receber ASPM_BASE_URL, ASPM_PAT,
+ASPM_WORKSPACE e ASPM_BUSINESS_PRODUCT pelas variáveis GitLab.
+Não é preciso passar sentinel.env, --env-file nem --build-arg no pipeline.
+Não coloque esses quatro valores no YAML; o container herda as variáveis do job.
 ASPM_PAT e SLACK_WEBHOOK_URL: Masked/Hidden, sem expansão de referências.
 Demais chaves: ASPM_BASE_URL, ASPM_WORKSPACE, ASPM_BUSINESS_PRODUCT,
 ASPM_SCAN_COMPLETE=false e ASPM_POLL_TIMEOUT=900.

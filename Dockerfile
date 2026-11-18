@@ -54,8 +54,9 @@ ENV GITLAB_URL="" \
     GITLAB_BRANCHES="" \
     GITLAB_VERIFY_TLS="true"
 
-# ---------------------------------------------------------------- ASPM (valores reais somente em runtime)
-ENV ASPM_BASE_URL="https://191.252.227.92" \
+# ---------------------------------------------------------------- ASPM (GitLab CI/CD Variables em runtime)
+# Destino e credenciais obrigatorios: sem valor de destino embutido na imagem.
+ENV ASPM_BASE_URL="" \
     ASPM_PAT="" \
     ASPM_WORKSPACE="" \
     ASPM_BUSINESS_PRODUCT="" \
